@@ -9,8 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return redirect('/posts');
-//        $post = Post::first();
-//        return view('home', compact('post'));
+        $posts = array(Post::latest()->first());
+        return view('posts.all', compact('posts'));
     }
 }

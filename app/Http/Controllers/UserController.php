@@ -12,10 +12,12 @@ class UserController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
     public function create()
     {
         return view('user.create');
     }
+
     public function store()
     {
         $this->validate(request(), [
@@ -27,14 +29,17 @@ class UserController extends Controller
         $user->name = request('name');
         $user->email = request('email');
         $user->password = bcrypt(request('password'));
+        $user->is_admin = 0;
         $user->save();
         Auth::login($user);
         return redirect('/');
     }
+
     public function login()
     {
         return view('user.login');
     }
+
     public function logUser()
     {
         $this->validate(request(), [
@@ -44,12 +49,14 @@ class UserController extends Controller
         if (Auth::attempt([
             'name' => request('name'),
             'password' => request('password')
-        ])) {
+        ])
+        ) {
             return redirect('/');
         } else {
             return back();
         }
     }
+
     public function logout()
     {
         Auth::logout();

@@ -12,15 +12,18 @@ class PostsController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
     }
+
     public function index()
     {
         $posts = Post::latest()->get();
         return view('posts.all', compact('posts'));
     }
+
     public function create()
     {
         return view('posts.create');
     }
+
     public function store()
     {
         $this->validate(request(), [
@@ -31,9 +34,11 @@ class PostsController extends Controller
         $post->title = request('title');
         $post->body = request('body');
         $post->user_id = Auth::id();
+        $post->category_id = 1;
         $post->save();
         return redirect('/posts');
     }
+
     public function show($id)
     {
         $post = Post::find($id);
@@ -42,6 +47,7 @@ class PostsController extends Controller
         }
         return view('posts.show', compact('post'));
     }
+
     public function edit($id)
     {
         $post = Post::find($id);
@@ -53,6 +59,7 @@ class PostsController extends Controller
         }
         return view('posts.edit', compact('post'));
     }
+
     public function update($id)
     {
         $this->validate(request(), [
@@ -71,6 +78,7 @@ class PostsController extends Controller
         $post->save();
         return redirect('/posts/' . $id);
     }
+
     public function destroy($id)
     {
         $post = Post::find($id);

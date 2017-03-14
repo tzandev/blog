@@ -1,5 +1,4 @@
 @extends('home')
-
 @section('content')
     <div class="row">
         <div class="box">
@@ -10,7 +9,8 @@
                 </h2>
                 <hr>
                 <p>{{$post->body}}</p>
-                <small>Posted on {{$post->created_at->toFormattedDateString()}} by <em><b>{{ $post->user->name }}</b></em></small>
+                <small>Posted on {{$post->created_at->toFormattedDateString()}} by
+                    <em><b>{{ $post->user->name }}</b></em></small>
             </div>
             @if(Auth::id() == $post->user_id)
                 <form action="/posts/edit/{{$post->id}}" method="get">
@@ -25,8 +25,6 @@
             @endif
         </div>
     </div>
-
-
     <div class="row">
         <div class="box">
             <div class="col-lg-12">
@@ -43,13 +41,12 @@
             <div class="box">
                 <div class="col-lg-12">
                     <p>{{$comment->body}}</p>
-                    <small>Posted on {{$comment->created_at->toFormattedDateString()}} by <em><b>{{ $comment->user->name }}</b></em></small>
+                    <small>Commented on {{$comment->created_at->toFormattedDateString()}} by
+                        <em><b>{{ $comment->user->name }}</b></em></small>
                 </div>
             </div>
         </div>
     @endforeach
-
-
     @if(Auth::check())
         <form action="/posts/{{$post->id}}/comment/create" method="post">
             {{csrf_field()}}
@@ -58,7 +55,7 @@
                     <div class="form-group">
                         <label for="comment_body">Add your comment:</label>
                         <textarea class="form-control" name="comment_body" id="comment_body" cols="30" rows="10"
-                          placeholder="Comment"></textarea>
+                                  placeholder="Comment"></textarea>
                     </div>
                     <div style="margin-bottom: 15px">
                         <input type="submit" class="btn btn-primary" value="Add new comment">
@@ -66,12 +63,11 @@
                 </div>
             </div>
         </form>
-        @else
+    @else
         <div class="row">
             <div class="box">
                 Want to add a comment? - <a href="/login">Sign In!</a>
             </div>
         </div>
-        
     @endif
 @endsection

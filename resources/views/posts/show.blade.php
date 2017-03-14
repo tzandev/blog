@@ -8,7 +8,7 @@
                     {{$post->title}}
                 </h2>
                 <hr>
-                <p>{{$post->body}}</p>
+                <p class="text-justify">{!! nl2br(e($post->body)) !!}</p>
                 <small>Posted on {{$post->created_at->toFormattedDateString()}} by
                     <em><b>{{ $post->user->name }}</b></em></small>
             </div>

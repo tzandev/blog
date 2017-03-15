@@ -33,7 +33,9 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/posts">Posts</a></li>
                 @if(Auth::check())
-                    <li><a href="/posts/create">New Post</a></li>
+                    @if(Auth::user()->isAdmin())
+                        <li><a href="/posts/create">New Post</a></li>
+                    @endif
                     <li><a href="/logout">Log Out</a></li>
                 @else
                     <li><a href="/register">Register</a></li>
@@ -55,5 +57,7 @@
         </div>
     </div>
 </footer>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -25,6 +25,7 @@ Route::group(['prefix' => 'posts/'], function (){
     Route::get('edit/{id}', 'PostsController@edit');
     Route::patch('edit/{id}', 'PostsController@update');
     Route::delete('delete/{id}', 'PostsController@destroy');
+    Route::post('comments/delete/{id}', 'CommentsController@destroy');
     Route::post('{id}/comment/create', 'CommentsController@create');
 });
 

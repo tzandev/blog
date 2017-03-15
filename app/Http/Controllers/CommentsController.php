@@ -32,4 +32,14 @@ class CommentsController extends Controller
         $comment->save();
         return redirect('/posts/' . $id);
     }
+
+
+    public function destroy($id)
+    {
+        $comment = Comment::find($id);
+        if ($comment && Auth::user()->isAdmin()) {
+            $comment->delete();
+        }
+        return redirect('/posts/' . $comment->post->id);
+    }
 }

@@ -41,6 +41,12 @@
             <div class="box">
                 <div class="col-lg-12">
                     <p>{{$comment->body}}</p>
+                    @if(Auth::user()->isAdmin())
+                        <form action="/posts/comments/delete/{{$comment->id}}" method="post">
+                            {{csrf_field()}}
+                            <input type="submit" class="btn btn-primary text-right" value="Delete comment">
+                        </form>
+                        @endif
                     <small>Commented on {{$comment->created_at->toFormattedDateString()}} by
                         <em><b>{{ $comment->user->name }}</b></em></small>
                 </div>

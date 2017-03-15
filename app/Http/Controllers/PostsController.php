@@ -21,7 +21,10 @@ class PostsController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        if (Auth::user()->isAdmin()) {
+            return view('posts.create');
+        }
+        return redirect('/posts');
     }
 
     public function store()

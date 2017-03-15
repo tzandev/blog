@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>tzandev's blog</title>
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/bootstrap/css/bootstrap-social.css" rel="stylesheet" type="text/css">
     <link href="/css/app.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
           rel="stylesheet" type="text/css">
@@ -52,7 +53,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <p>Copyright &copy; tzandev {{\Carbon\Carbon::now()->year}}</p>
+                <p>Copyright &copy; tzandev {{\Carbon\Carbon::now()->year}}
+                    <a href="https://www.facebook.com/tzandev" class="btn btn-social btn-facebook col-md-offset-3" target="_blank">
+                        <span class="fa fa-facebook">f</span>Facebook
+                    </a>
+                    <a href="https://github.com/tzandev" class="btn btn-social btn-github col-lg-offset-0" target="_blank">
+                        <span class="fa fa-github text-right">G</span>GitHub
+                    </a>
+                </p>
             </div>
         </div>
     </div>

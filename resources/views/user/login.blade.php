@@ -10,6 +10,7 @@
                 </h2>
                 <hr>
                 <form action="/login" method="POST">
+                    @include('errors')
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="name">Username</label>

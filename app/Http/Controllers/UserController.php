@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout', 'settings', 'change');
     }
 
     public function create()
@@ -53,7 +53,7 @@ class UserController extends Controller
         ) {
             return redirect('/');
         } else {
-            return back();
+            return redirect('/login')->withErrors('Wrong username/password');
         }
     }
 
@@ -61,5 +61,36 @@ class UserController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+
+    public function settings()
+    {
+
+        if (Auth::check()) {
+            return view('settings');
+        }
+        return back();
+
+    }
+
+    public function change()
+    {
+        $this->validate(request(), [
+            'old_password' => 'required',
+            'password' => 'required|confirmed|min:6'
+        ]);
+        if (Auth::user()) {
+            if (Auth::attempt([
+                'password' => request('old_password')
+            ])
+            ) {
+                $user = Auth::user();
+                $user->password = bcrypt(request('password'));
+                $user->save();
+                return redirect('/posts');
+            }
+        }
+        return redirect('/settings')->withErrors('Old password is incorrect');
     }
 }

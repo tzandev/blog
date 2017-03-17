@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except('logout', 'settings', 'change');
+        $this->middleware('guest')->except('logout', 'settings', 'update');
     }
 
     public function create()
@@ -66,31 +66,24 @@ class UserController extends Controller
 
     public function settings()
     {
-
-        if (Auth::check()) {
-            return view('settings');
-        }
-        return back();
-
+        return view('settings');
     }
 
-    public function change()
+    public function update()
     {
         $this->validate(request(), [
             'old_password' => 'required',
             'password' => 'required|confirmed|min:6'
         ]);
-        if (Auth::user()) {
-            if (Auth::attempt([
-                'password' => request('old_password')
-            ])
-            ) {
-                $user = Auth::user();
-                $user->password = bcrypt(request('password'));
-                $user->save();
-                return redirect('/posts');
-            }
+        if (Auth::attempt([
+            'password' => request('old_password')
+        ])
+        ) {
+            $user = Auth::user();
+            $user->password = bcrypt(request('password'));
+            $user->save();
+            return redirect('/settings')->withErrors('Your password has been changed!');
         }
-        return redirect('/settings')->withErrors('Old password is incorrect');
+        return redirect('/settings')->withErrors('Old password is incorrect!');
     }
 }

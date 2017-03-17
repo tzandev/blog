@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('settings', 'UserController@settings');
-Route::put('settings', 'UserController@change');
+Route::patch('settings', 'UserController@update');
 Route::get('register', 'UserController@create');
 Route::post('register', 'UserController@store');
 Route::get('logout', 'UserController@logout')->name('logout');

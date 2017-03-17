@@ -33,12 +33,14 @@ class PostsController extends Controller
             'title' => 'required',
             'body' => 'required'
         ]);
-        $post = new Post();
-        $post->title = request('title');
-        $post->body = request('body');
-        $post->user_id = Auth::id();
-        $post->category_id = 1;
-        $post->save();
+        if (Auth::user()->isAdmin()) {
+            $post = new Post();
+            $post->title = request('title');
+            $post->body = request('body');
+            $post->user_id = Auth::id();
+            $post->category_id = 1;
+            $post->save();
+        }
         return redirect('/posts');
     }
 

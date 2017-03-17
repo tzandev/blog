@@ -12,7 +12,7 @@
                 <form action="/settings" method="POST">
                     @include('errors')
                     {{csrf_field()}}
-                    {{method_field('put')}}
+                    {{method_field('patch')}}
                     <div class="form-group">
                         <label for="name">Username</label>
                         <fieldset disabled>
@@ -38,7 +38,6 @@
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Confirm">
-                        {{--<div style="float: right"></div>--}}
                     </div>
                 </form>
             </div>

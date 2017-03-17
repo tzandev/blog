@@ -37,7 +37,8 @@
                     @if(Auth::user()->isAdmin())
                         <li><a href="/posts/create">New Post</a></li>
                     @endif
-                    <li><a href="/logout">Log Out</a></li>
+                        <li><a href="/settings">Profile</a></li>
+                        <li><a href="/logout">Log Out</a></li>
                 @else
                     <li><a href="/register">Register</a></li>
                     <li><a href="/login">Login</a></li>
@@ -53,7 +54,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <p>Copyright &copy; tzandev {{\Carbon\Carbon::now()->year}}
+                <p>Copyright &copy; tzandev - {{\Carbon\Carbon::now()->year}}
                     <a href="https://www.facebook.com/tzandev" class="btn btn-social btn-facebook col-md-offset-3" target="_blank">
                         <span class="fa fa-facebook">f</span>Facebook
                     </a>

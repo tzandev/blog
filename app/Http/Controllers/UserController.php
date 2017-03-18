@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except('logout', 'settings', 'update');
+        $this->middleware('auth')->only('logout', 'settings', 'update');
     }
 
     public function create()
@@ -21,7 +21,7 @@ class UserController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'name' => 'required|unique:users',
             'email' => 'required',
             'password' => 'required|confirmed|min:6'
         ]);

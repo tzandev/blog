@@ -37,8 +37,8 @@
                     @if(Auth::user()->isAdmin())
                         <li><a href="/posts/create">New Post</a></li>
                     @endif
-                        <li><a href="/settings">Profile</a></li>
-                        <li><a href="/logout">Log Out</a></li>
+                    <li><a href="/settings">Profile</a></li>
+                    <li><a href="/logout">Log Out</a></li>
                 @else
                     <li><a href="/register">Register</a></li>
                     <li><a href="/login">Login</a></li>
@@ -47,6 +47,11 @@
         </div>
     </div>
 </nav>
+@if($flash = session('message'))
+    <div id="flash-message" class="alert alert-success text-center">
+        {{$flash}}
+    </div>
+@endif
 <div class="container">
     @yield('content')
 </div>
@@ -55,10 +60,12 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <p>Copyright &copy; tzandev - {{\Carbon\Carbon::now()->year}}
-                    <a href="https://www.facebook.com/tzandev" class="btn btn-social btn-facebook col-md-offset-3" target="_blank">
+                    <a href="https://www.facebook.com/tzandev" class="btn btn-social btn-facebook col-md-offset-3"
+                       target="_blank">
                         <span class="fa fa-facebook">f</span>Facebook
                     </a>
-                    <a href="https://github.com/tzandev" class="btn btn-social btn-github col-lg-offset-0" target="_blank">
+                    <a href="https://github.com/tzandev" class="btn btn-social btn-github col-lg-offset-0"
+                       target="_blank">
                         <span class="fa fa-github text-right">G</span>GitHub
                     </a>
                 </p>

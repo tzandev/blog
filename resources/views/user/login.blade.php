@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Sign In">
-                        <div style="float: right">or <a href="/register">Sign Up</a></div>
+                        <div id="button-right">or <a href="/register">Sign Up</a></div>
                     </div>
                 </form>
             </div>

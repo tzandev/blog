@@ -15,12 +15,12 @@
             @if(Auth::id() == $post->user_id)
                 <form action="/posts/edit/{{$post->id}}" method="get">
                     {{csrf_field()}}
-                    <div style="float: left"><input type="submit" class="btn btn-primary" value="Edit Post"></div>
+                    <div id="button-left"><input type="submit" class="btn btn-primary" value="Edit Post"></div>
                 </form>
                 <form action="/posts/delete/{{$post->id}}" method="POST">
                     {{csrf_field()}}
                     {{method_field('delete')}}
-                    <div style="float: right"><input type="submit" class="btn btn-primary" value="Delete Post"></div>
+                    <div id="button-right"><input type="submit" class="btn btn-primary" value="Delete Post"></div>
                 </form>
             @endif
         </div>
@@ -41,7 +41,7 @@
             <div class="box">
                 <div class="col-lg-12">
                     <p>{{$comment->body}}</p>
-                    @if(Auth::user()->isAdmin())
+                    @if(Auth::check() && Auth::user()->isAdmin())
                         <form action="/posts/comments/delete/{{$comment->id}}" method="post">
                             {{csrf_field()}}
                             <input type="submit" class="btn btn-primary text-right" value="Delete comment">
@@ -63,7 +63,7 @@
                         <textarea class="form-control" name="comment_body" id="comment_body" cols="30" rows="10"
                                   placeholder="Comment"></textarea>
                     </div>
-                    <div style="margin-bottom: 15px">
+                    <div>
                         <input type="submit" class="btn btn-primary" value="Add new comment">
                     </div>
                 </div>

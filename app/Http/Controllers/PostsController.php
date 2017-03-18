@@ -40,6 +40,7 @@ class PostsController extends Controller
             $post->user_id = Auth::id();
             $post->category_id = 1;
             $post->save();
+            session()->flash('message', 'Your post has been added!');
         }
         return redirect('/posts');
     }
@@ -81,6 +82,7 @@ class PostsController extends Controller
         $post->title = request('title');
         $post->body = request('body');
         $post->save();
+        session()->flash('message', 'The post has been updated!');
         return redirect('/posts/' . $id);
     }
 
@@ -94,6 +96,7 @@ class PostsController extends Controller
             return redirect('/posts');
         }
         $post->delete();
+        session()->flash('message', 'The post was deleted!');
         return redirect('/posts');
     }
 }

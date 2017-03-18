@@ -32,6 +32,7 @@ class UserController extends Controller
         $user->is_admin = 0;
         $user->save();
         Auth::login($user);
+        session()->flash('message', 'Your registration is successful!');
         return redirect('/');
     }
 
@@ -51,6 +52,7 @@ class UserController extends Controller
             'password' => request('password')
         ])
         ) {
+            session()->flash('message', 'You are now logged in!');
             return redirect('/');
         } else {
             return redirect('/login')->withErrors('Wrong username/password');
@@ -76,13 +78,15 @@ class UserController extends Controller
             'password' => 'required|confirmed|min:6'
         ]);
         if (Auth::attempt([
-            'password' => request('old_password')
+            'password' => request('old_password'),
+            'id' => Auth::id()
         ])
         ) {
             $user = Auth::user();
             $user->password = bcrypt(request('password'));
             $user->save();
-            return redirect('/settings')->withErrors('Your password has been changed!');
+            session()->flash('message', 'Your password has been changed!');
+            return redirect('/settings');
         }
         return redirect('/settings')->withErrors('Old password is incorrect!');
     }

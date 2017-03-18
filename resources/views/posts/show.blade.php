@@ -12,7 +12,7 @@
                 <small>Posted on {{$post->created_at->toFormattedDateString()}} by
                     <em><b>{{ $post->user->name }}</b></em></small>
             </div>
-            @if(Auth::id() == $post->user_id)
+            @if(Auth::id() == $post->user_id || Auth::user()->isAdmin())
                 <form action="/posts/edit/{{$post->id}}" method="get">
                     {{csrf_field()}}
                     <div id="button-left"><input type="submit" class="btn btn-primary" value="Edit Post"></div>

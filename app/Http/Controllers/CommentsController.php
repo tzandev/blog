@@ -32,7 +32,6 @@ class CommentsController extends Controller
         return redirect('/posts/' . $id);
     }
 
-
     public function destroy($id)
     {
         $comment = Comment::find($id);

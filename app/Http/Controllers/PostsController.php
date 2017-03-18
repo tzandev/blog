@@ -60,10 +60,12 @@ class PostsController extends Controller
         if (!$post) {
             return redirect('/posts');
         }
-        if (Auth::id() != $post->user_id) {
+        if (Auth::id() == $post->user_id || Auth::user()->isAdmin()) {
+            return view('posts.edit', compact('post'));
+        } else {
             return redirect('/posts');
         }
-        return view('posts.edit', compact('post'));
+
     }
 
     public function update($id)
@@ -76,14 +78,16 @@ class PostsController extends Controller
         if (!$post) {
             return redirect('/posts');
         }
-        if (Auth::id() != $post->user_id) {
+        if (Auth::id() == $post->user_id || Auth::user()->isAdmin()) {
+            $post->title = request('title');
+            $post->body = request('body');
+            $post->save();
+            session()->flash('message', 'The post has been updated!');
+            return redirect('/posts/' . $id);
+        } else {
             return redirect('/posts');
+
         }
-        $post->title = request('title');
-        $post->body = request('body');
-        $post->save();
-        session()->flash('message', 'The post has been updated!');
-        return redirect('/posts/' . $id);
     }
 
     public function destroy($id)
@@ -92,11 +96,13 @@ class PostsController extends Controller
         if (!$post) {
             return redirect('/posts');
         }
-        if (Auth::id() != $post->user_id) {
+        if (Auth::id() == $post->user_id || Auth::user()->isAdmin()) {
+            $post->delete();
+            session()->flash('message', 'The post was deleted!');
+            return redirect('/posts');
+        } else {
             return redirect('/posts');
         }
-        $post->delete();
-        session()->flash('message', 'The post was deleted!');
-        return redirect('/posts');
+
     }
 }

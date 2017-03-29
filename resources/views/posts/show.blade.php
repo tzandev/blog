@@ -12,16 +12,18 @@
                 <small>Posted on {{$post->created_at->toFormattedDateString()}} by
                     <em><b>{{ $post->user->name }}</b></em></small>
             </div>
-            @if(Auth::id() == $post->user_id || Auth::user()->isAdmin())
-                <form action="/posts/edit/{{$post->id}}" method="get">
-                    {{csrf_field()}}
-                    <div id="button-left"><input type="submit" class="btn btn-primary" value="Edit Post"></div>
-                </form>
-                <form action="/posts/delete/{{$post->id}}" method="POST">
-                    {{csrf_field()}}
-                    {{method_field('delete')}}
-                    <div id="button-right"><input type="submit" class="btn btn-primary" value="Delete Post"></div>
-                </form>
+            @if(Auth::check())
+                @if(Auth::id() == $post->user_id || Auth::user()->isAdmin())
+                    <form action="/posts/edit/{{$post->id}}" method="get">
+                        {{csrf_field()}}
+                        <div id="button-left"><input type="submit" class="btn btn-primary" value="Edit Post"></div>
+                    </form>
+                    <form action="/posts/delete/{{$post->id}}" method="POST">
+                        {{csrf_field()}}
+                        {{method_field('delete')}}
+                        <div id="button-right"><input type="submit" class="btn btn-primary" value="Delete Post"></div>
+                    </form>
+                @endif
             @endif
         </div>
     </div>
@@ -46,7 +48,7 @@
                             {{csrf_field()}}
                             <input type="submit" class="btn btn-primary text-right" value="Delete comment">
                         </form>
-                        @endif
+                    @endif
                     <small>Commented on {{$comment->created_at->toFormattedDateString()}} by
                         <em><b>{{ $comment->user->name }}</b></em></small>
                 </div>

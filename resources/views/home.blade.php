@@ -48,7 +48,7 @@
     </div>
 </nav>
 @if($flash = session('message'))
-    <div id="flash-message" class="alert alert-success text-center">
+    <div id="flash-message">
         {{$flash}}
     </div>
 @endif
@@ -74,6 +74,8 @@
     </div>
 </footer>
 <script src="/js/jquery.js"></script>
+<script src="/js/style.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+
 </body>
 </html>

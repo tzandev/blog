@@ -11,6 +11,12 @@ const {mix} = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-    .js('resources/assets/js/style.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css');
+mix.js([
+    'resources/assets/js/responsiveslides.js',
+    'resources/assets/js/style.js',
+    'resources/assets/js/app.js',
+    'resources/assets/js/bootstrap.js',
+    'resources/assets/js/jquery.js'
+    ], 'public/js/app.js')
+    .sass('resources/assets/sass/app.scss', 'public/css')
+    .sass('resources/assets/sass/responsiveslides.scss', 'public/css');

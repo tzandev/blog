@@ -7,7 +7,25 @@
                 <div id="carousel-example-generic" class="carousel slide">
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img class="img-responsive img-full" src="/images/WP_20160207_002.jpg" alt="">
+                            {{--<img class="img-responsive img-full" src="/images/WP_20160207_002.jpg" alt="">--}}
+                            <div id="wrapper">
+                                <div class="callbacks_container">
+                                    <ul class="rslides" id="slider">
+                                        <li>
+                                            <img src="/images/01.resized.jpg" alt="">
+                                        </li>
+                                        <li>
+                                            <img src="/images/02.resized.jpg" alt="">
+                                        </li>
+                                        <li>
+                                            <img src="/images/03.resized.jpg" alt="">
+                                        </li>
+                                        <li>
+                                            <img src="/images/04.resized.jpg" alt="">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -24,4 +42,5 @@
             </div>
         </div>
     </div>
+
 @endsection

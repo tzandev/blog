@@ -97,6 +97,7 @@ class PostsController extends Controller
             return redirect('/posts');
         }
         if (Auth::id() == $post->user_id || Auth::user()->isAdmin()) {
+            $post->comments()->delete();
             $post->delete();
             session()->flash('message', 'The post was deleted!');
             return redirect('/posts');
